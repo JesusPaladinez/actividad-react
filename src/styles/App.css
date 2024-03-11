@@ -1,0 +1,23 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body {
+    background: linear-gradient(to right bottom, #43b7b8, #335cc5, #5c2774);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    color: #fff;
+}
+
+.container-app {
+    text-align: center;
+    gap: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

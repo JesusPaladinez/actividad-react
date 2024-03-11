@@ -1,0 +1,10 @@
+.container-filtro {
+    display: flex;
+    justify-content: center;
+}
+
+.filtro {
+    border: none;
+    border-radius: 6px;
+    padding: 8px;
+}
