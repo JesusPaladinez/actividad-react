@@ -1,11 +1,11 @@
-.container-filtro {
+.container-seleccionador {
     display: flex;
     justify-content: center;
 }
 
-.filtro {
+.seleccionador {
+    width: 240px;
     border: none;
     border-radius: 6px;
     padding: 8px;
-    margin: 25px;
 }

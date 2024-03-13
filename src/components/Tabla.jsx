@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Tabla = ({data}) => {
+const Tabla = ({data, registros}) => {
     return (
         <div className="container-tabla">
             <table>
