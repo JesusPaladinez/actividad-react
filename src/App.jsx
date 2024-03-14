@@ -16,26 +16,34 @@ import './styles/Seleccionador.css'
 import './styles/Total.css'
 
 const App = () => {
-  // Funciones del seleccionador
-  const [cantidadPersonas, setCantidadPersonas] = useState(5);
-  const handleSeleccionador = (e) => {
-    setCantidadPersonas(Number(e.target.value));
-  };
+  const [search, setSearch] = useState(''); // Contiene el valor del filtro
+  const [tamañoTabla, setTamañoTabla] = useState(5); // Contiene el tamaño de la tabla
+  const [inicioTabla, setInicioTabla] = useState(1); // Contiene el número en donde empieza la tabla
 
-  // Funciones del filtro
-  const [search, setSearch] = useState('');
   const handleSearch = (search) => {
-    setSearch(search);
+    setSearch(search); // Actualiza el estado del filtro con los datos obtenidos en el input
   };
 
-  const filterData = personas.filter((atributo) => atributo.nombre.toLowerCase().includes(search.toLowerCase())).slice(0, cantidadPersonas);
+  const handleTamañoTabla = (e) => {
+    setTamañoTabla(Number(e.target.value)); // Actualiza el estado del tamaño de la tabla con el valor seleccionado en el select
+    setInicioTabla(1); // Cuando se cambia el tamaño de la página, vuelve a su estado inicial
+  };
+
+  const indiceInicial = (inicioTabla - 1) * tamañoTabla; // Calcula el índice inicial de la tabla
+  const indiceFinal = Math.max(indiceInicial + tamañoTabla, personas.length); // Calcula el índice final de la tabla
+
+  // Filtra los datos según la busqueda
+  const filterData = personas.filter((atributo) =>
+    atributo.nombre.includes(search.toLowerCase()) ||
+    atributo.descripcion.includes(search.toLowerCase())
+  ).slice(indiceInicial, indiceFinal);
 
   return (
     <>
       <Filtro onSearch={handleSearch} />
-      <Seleccionador value={cantidadPersonas} onChange={handleSeleccionador} />
+      <Seleccionador value={tamañoTabla} onChange={handleTamañoTabla} />
       <Tabla data={filterData} />
-      <Total numRegistros={filterData.length} totalPersonas={personas.length} />
+      <Total registrosSeleccionados={indiceInicial} totalRegistros={indiceFinal} />
     </>
   )
 }

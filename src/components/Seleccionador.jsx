@@ -1,15 +1,14 @@
 import React from 'react';
 
 const Seleccionador = () => {
-    const opcionesSeleccionador = [5, 10, 15, 20];
 
     return (
         <div className='container-seleccionador'>
             <select className='seleccionador'>
-                {opcionesSeleccionador.map((opcion) => (
-                    <option key={opcion} value={opcion} >{opcion} </option>                    
-                ))}
-                
+                <option value={5} >5</option>
+                <option value={10} >10</option>
+                <option value={15} >15</option>
+                <option value={20} >20</option>
             </select>
         </div>
     );
