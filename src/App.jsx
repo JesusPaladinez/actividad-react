@@ -6,12 +6,14 @@ import Filtro from './components/Filtro';
 import Tabla from './components/Tabla';
 import personas from './components/Personas';
 import Seleccionador from './components/Seleccionador';
+import Total from './components/Total';
 
 // Importación de estilos
 import './styles/App.css';
 import './styles/Tabla.css'
 import './styles/Filtro.css'
 import './styles/Seleccionador.css'
+import './styles/Total.css'
 
 const App = () => {
   // Funciones del filtro
@@ -20,7 +22,7 @@ const App = () => {
     setSearch(search);
   };
   const filterData = personas.filter((atributo) => atributo.nombre.toLowerCase().includes(search.toLowerCase()));
-  
+
   // Funciones del seleccionador
   const [cantidadPersonas, setCantidadPersonas] = useState(0);
   const handleSeleccionador = (e) => {
@@ -33,6 +35,7 @@ const App = () => {
       <Filtro onSearch={handleSearch} />
       <Seleccionador onChange={handleSeleccionador} />
       <Tabla data={filterData} registros={mostrarRegistros} />
+      <Total numRegistros={setCantidadPersonas} />
     </>
   )
 }
