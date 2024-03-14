@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Total = ({numRegistros}) => {
+const Total = ({numRegistros, totalPersonas}) => {
     return (
         <div className='container-total'>
-            <h2>Seleccionó {numRegistros} de 20 registros</h2>
+            <h2>Seleccionó {numRegistros} de {totalPersonas} registros</h2>
         </div>
     );
 }

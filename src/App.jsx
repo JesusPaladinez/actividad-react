@@ -1,4 +1,4 @@
-// Importación de dependecias
+// Importación de hooks
 import { useState } from 'react';
 
 // Importación de componentes
@@ -16,28 +16,28 @@ import './styles/Seleccionador.css'
 import './styles/Total.css'
 
 const App = () => {
+  // Funciones del seleccionador
+  const [cantidadPersonas, setCantidadPersonas] = useState(5);
+  const handleSeleccionador = (e) => {
+    setCantidadPersonas(Number(e.target.value));
+  };
+
   // Funciones del filtro
   const [search, setSearch] = useState('');
   const handleSearch = (search) => {
     setSearch(search);
   };
-  const filterData = personas.filter((atributo) => atributo.nombre.toLowerCase().includes(search.toLowerCase()));
 
-  // Funciones del seleccionador
-  const [cantidadPersonas, setCantidadPersonas] = useState(0);
-  const handleSeleccionador = (e) => {
-    setCantidadPersonas(Number(e.target.value));
-  };
-  const mostrarRegistros = cantidadPersonas > 0 ? personas.slice(0, cantidadPersonas) : [];
+  const filterData = personas.filter((atributo) => atributo.nombre.toLowerCase().includes(search.toLowerCase())).slice(0, cantidadPersonas);
 
   return (
     <>
       <Filtro onSearch={handleSearch} />
-      <Seleccionador onChange={handleSeleccionador} />
-      <Tabla data={filterData} registros={mostrarRegistros} />
-      <Total numRegistros={setCantidadPersonas} />
+      <Seleccionador value={cantidadPersonas} onChange={handleSeleccionador} />
+      <Tabla data={filterData} />
+      <Total numRegistros={filterData.length} totalPersonas={personas.length} />
     </>
   )
 }
 
-export default App
+export default App;

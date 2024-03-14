@@ -1,23 +1,15 @@
-import React, { useState } from 'react';
-import personas from './Personas';
+import React from 'react';
 
 const Seleccionador = () => {
+    const opcionesSeleccionador = [5, 10, 15, 20];
+
     return (
         <div className='container-seleccionador'>
-            <select className='seleccionador' name="seleccionador">
-                <option value="0">Selecciona el número de registros</option>
-                {[...Array(personas.lenght).keys()].map((index) => (
-                    <option key={index + 1} value={index + 1}>{index + 5} </option>
+            <select className='seleccionador'>
+                {opcionesSeleccionador.map((opcion) => (
+                    <option key={opcion} value={opcion} >{opcion} </option>                    
                 ))}
-                {[...Array(personas.lenght).keys()].map((index) => (
-                    <option key={index + 1} value={index + 1}>{index + 10} </option>
-                ))}
-                {[...Array(personas.lenght).keys()].map((index) => (
-                    <option key={index + 1} value={index + 1}>{index + 15} </option>
-                ))}
-                {[...Array(personas.lenght).keys()].map((index) => (
-                    <option key={index + 1} value={index + 1}>{index + 20} </option>
-                ))}
+                
             </select>
         </div>
     );
