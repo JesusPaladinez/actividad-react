@@ -1,5 +1,5 @@
 // Importación de hooks
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 // Importación de componentes
 import Filtro from './components/Filtro';
@@ -18,16 +18,21 @@ import './styles/Total.css'
 const App = () => {
   const [search, setSearch] = useState(''); // Contiene el valor del filtro
   const [tamañoTabla, setTamañoTabla] = useState(5); // Contiene el tamaño de la tabla
+  const [totalElementos, setTotalElementos] = useState(0); // Contiene el total de elementos de la tabla
   const [inicioTabla, setInicioTabla] = useState(1); // Contiene el número en donde empieza la tabla
 
-  const handleSearch = (search) => {
-    setSearch(search); // Actualiza el estado del filtro con los datos obtenidos en el input
-  };
+  useEffect(() => {
+    setTotalElementos(personas.length);
+  }, [personas.length]);
 
-  const handleTamañoTabla = (e) => {
-    setTamañoTabla(Number(e.target.value)); // Actualiza el estado del tamaño de la tabla con el valor seleccionado en el select
-    setInicioTabla(1); // Cuando se cambia el tamaño de la página, vuelve a su estado inicial
-  };
+  function handleSearch(search) {
+    setSearch(search); // Actualiza el estado del filtro con los datos obtenidos en el input
+  }
+
+  const handleTamañoTabla = (valor) => {
+    setTamañoTabla(valor);
+    setInicioTabla(1); // Reinicia la página actual cuando cambia el número de filas
+  }
 
   const indiceInicial = (inicioTabla - 1) * tamañoTabla; // Calcula el índice inicial de la tabla
   const indiceFinal = Math.max(indiceInicial + tamañoTabla, personas.length); // Calcula el índice final de la tabla
@@ -42,8 +47,16 @@ const App = () => {
     <>
       <Filtro onSearch={handleSearch} />
       <Seleccionador value={tamañoTabla} onChange={handleTamañoTabla} />
-      <Tabla data={filterData} />
-      <Total registrosSeleccionados={indiceInicial} totalRegistros={indiceFinal} />
+      <Tabla
+        data={search ? filterData.slice((inicioTabla - 1) * tamañoTabla, inicioTabla * tamañoTabla) : personas.slice((inicioTabla - 1) * tamañoTabla, inicioTabla * tamañoTabla)}
+        inicioTabla={inicioTabla}
+        totalElementos={totalElementos}
+        tamañoTabla={tamañoTabla}
+      />
+      <Total
+        registrosSeleccionados={tamañoTabla}
+        totalRegistros={personas.length}
+      />
     </>
   )
 }
