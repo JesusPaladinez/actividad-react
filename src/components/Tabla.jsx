@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const Tabla = ({data, eliminacion}) => {
+// Importación de componentes
+import Icon from './Icon';
+
+// Importación de librerías
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+
+const Tabla = ({ data, eliminacion }) => {
 
     return (
         <div className="container-tabla">
@@ -13,7 +18,7 @@ const Tabla = ({data, eliminacion}) => {
                         <th>DESCRIPCIÓN</th>
                         <th>ACCIONES</th>
                     </tr>
-                </thead> 
+                </thead>
                 <tbody>
                     {/* Con el método map() se recorre cada atributo del objeto */}
                     {data.map((fila) => (
@@ -21,7 +26,11 @@ const Tabla = ({data, eliminacion}) => {
                             <td>{fila.id} </td>
                             <td>{fila.nombre} </td>
                             <td>{fila.descripcion} </td>
-                            <td><button onClick={() => eliminacion(fila.id)} >Eliminar </button></td>
+                            <td>
+                                <button onClick={() => eliminacion(fila.id)} >
+                                    <Icon faStyle='boton' icon={faTrash} >Eliminar</Icon>
+                                </button>
+                            </td>
                         </tr>
                     ))}
                 </tbody>
