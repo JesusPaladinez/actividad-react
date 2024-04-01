@@ -34,24 +34,27 @@ const App = () => {
     setInicioTabla(1); // Reinicia la página actual cuando cambia el número de filas
   }
 
-  const indiceInicial = (inicioTabla - 1) * tamañoTabla; // Calcula el índice inicial de la tabla
-  const indiceFinal = Math.max(indiceInicial + tamañoTabla, personas.length); // Calcula el índice final de la tabla
+  const eliminarFila = (id) => {
+    const index = personas.findIndex(fila => fila.id === id);
+    if (index !== -1) {
+      personas.splice(index, 1);
+      setTotalElementos(personas.length)
+    }
+  }
 
   // Filtra los datos según la busqueda
   const filterData = personas.filter((atributo) =>
-    atributo.nombre.includes(search.toLowerCase()) ||
-    atributo.descripcion.includes(search.toLowerCase())
-  ).slice(indiceInicial, indiceFinal);
+    atributo.nombre.toLowerCase().includes(search.toLowerCase()) ||
+    atributo.descripcion.toLowerCase().includes(search.toLowerCase())
+  ).slice((inicioTabla - 1) * tamañoTabla, inicioTabla * tamañoTabla);
 
   return (
     <>
       <Filtro onSearch={handleSearch} />
       <Seleccionador value={tamañoTabla} onChange={handleTamañoTabla} />
       <Tabla
-        data={search ? filterData.slice((inicioTabla - 1) * tamañoTabla, inicioTabla * tamañoTabla) : personas.slice((inicioTabla - 1) * tamañoTabla, inicioTabla * tamañoTabla)}
-        inicioTabla={inicioTabla}
-        totalElementos={totalElementos}
-        tamañoTabla={tamañoTabla}
+        data={filterData}
+        eliminacion={eliminarFila}
       />
       <Total
         registrosSeleccionados={tamañoTabla}
