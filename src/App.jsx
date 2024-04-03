@@ -15,8 +15,6 @@ import './styles/Filtro.css'
 import './styles/Seleccionador.css'
 import './styles/Total.css'
 
-// comentario de prueba
-
 const App = () => {
   const [search, setSearch] = useState(''); // Contiene el valor del filtro
   const [tamañoTabla, setTamañoTabla] = useState(5); // Contiene el tamaño de la tabla
