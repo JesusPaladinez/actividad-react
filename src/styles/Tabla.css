@@ -4,6 +4,8 @@
     border-radius: 30px;
     overflow: hidden;
     margin: 20px;
+    /* height: 360px;
+    overflow-y: scroll; */
 }
 
 table {
@@ -35,4 +37,10 @@ button {
     background-color: rgba(255, 255, 255, 0.1);
     border: none;
     cursor: pointer;
+}
+
+.acciones {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
 }
